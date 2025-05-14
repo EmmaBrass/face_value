@@ -1,3 +1,4 @@
+from face_value.logger import image_logger as logger
 import os
 import time
 import grpc
@@ -47,12 +48,12 @@ class TestImageSender:
             responses = stub.StreamFrames(image_generator())
             
             for response in responses:
-                print(f"Server response: {response.message}")
+                logger.info(f"Server response: {response.message}")
 
         except grpc.RpcError as e:
-            print(f"RPC Error: {e}")
+            logger.error(f"RPC Error: {e}")
         except Exception as e:
-            print(f"Error sending images: {e}")
+            logger.error(f"Error sending images: {e}")
 
 def main():
     test_images_dir = '/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/grpc_image_streaming/test_images'

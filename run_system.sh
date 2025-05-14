@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Default mode is real (not simulation)
-MODE="real"
+MODE="simulation"
 
 # Parse command-line arguments
 while [[ "$#" -gt 0 ]]; do

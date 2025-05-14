@@ -4,23 +4,16 @@ import numpy as np
 import os
 from concurrent import futures
 import sys
-import logging
-import uuid
 import time
 import threading
 from datetime import datetime, timedelta
-
 sys.path.append('/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/grpc_image_streaming/proto')
+
+# Import custom logger
+from face_value.logger import image_logger as logger
 
 import image_stream_pb2
 import image_stream_pb2_grpc
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO, 
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    filename='image_receiver.log'
-)
 
 class ImageStreamerServicer(image_stream_pb2_grpc.ImageStreamerServicer):
     # Dictionary to store latest images from different sources
@@ -42,7 +35,7 @@ class ImageStreamerServicer(image_stream_pb2_grpc.ImageStreamerServicer):
         device_id = context.peer()
         
         # Log device connection
-        logging.info(f'Device connected: {device_id}')
+        logger.info(f'Device connected: {device_id}')
         
         # Track device connection
         connection_time = datetime.now()
@@ -91,7 +84,7 @@ class ImageStreamerServicer(image_stream_pb2_grpc.ImageStreamerServicer):
         
         finally:
             # Log device disconnection
-            logging.info(f'Device disconnected: {device_id}')
+            logger.info(f'Device disconnected: {device_id}')
 
     @classmethod
     def get_latest_image(cls, source_id=None):
@@ -154,7 +147,7 @@ class ImageStreamerServicer(image_stream_pb2_grpc.ImageStreamerServicer):
         ]
         
         for device_id in stale_devices:
-            logging.info(f'Removing stale device connection: {device_id}')
+            logger.warning(f'Stale device connection detected: {device_id}')
             cls._device_connections.pop(device_id, None)
             cls._latest_images.pop(device_id, None)
 
