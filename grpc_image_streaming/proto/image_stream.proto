@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package image_streaming;
+
+service ImageStreamer {
+  // Bidirectional streaming RPC for sending image frames
+  rpc StreamFrames(stream ImageFrame) returns (stream ServerResponse) {}
+}
+
+message ImageFrame {
+  // Compressed JPEG image bytes
+  bytes image_data = 1;
+  
+  // Optional metadata about the frame
+  int64 timestamp = 2;
+  string camera_id = 3;
+}
+
+message ServerResponse {
+  enum Status {
+    OK = 0;
+    ERROR = 1;
+  }
+  Status status = 1;
+  string message = 2;
+}
