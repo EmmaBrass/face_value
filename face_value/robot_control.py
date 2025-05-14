@@ -121,5 +121,3 @@ def robot_operation(func: Optional[Callable] = None, *, mode: str = 'simulation'
     
     # Allow decorator to be used with or without parentheses
     return decorator(func) if func else decorator
-
-# Main control logic moved to robot_main.py

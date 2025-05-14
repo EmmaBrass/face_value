@@ -6,6 +6,8 @@ from concurrent import futures
 import sys
 import logging
 import uuid
+import time
+import threading
 from datetime import datetime, timedelta
 
 sys.path.append('/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/grpc_image_streaming/proto')

@@ -1,8 +1,15 @@
 
+To learn:
+
+- Touch Designer for visual in middle screen?
+- What format do we need to be creating video in for feeding to the projectors?
+
 To make:
 
-- Connection to an LLM (a local one ideally) for a 'voice' for the robot.
+- Connection to an LLM (a local one ideally) for a 'voice' for the robot. Can use OpenAI's API for testing. 
+- Map out system flow (state machine type of thing).
 - Layout of recent images from RPis for passing through to projectors -> ensure resolution looks okay.
+- Clock node or something for syncing robot motions with the visuals on the middle screen.
 
 To test:
 
