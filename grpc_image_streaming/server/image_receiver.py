@@ -7,13 +7,13 @@ import sys
 import time
 import threading
 from datetime import datetime, timedelta
-sys.path.append('/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/grpc_image_streaming/proto')
+sys.path.append(os.path.join(os.path.dirname(__file__), 'proto'))
 
 # Import custom logger
-from face_value.logger import image_logger as logger
+from logger import image_logger as logger
 
-import image_stream_pb2
-import image_stream_pb2_grpc
+from ..proto import image_stream_pb2
+from ..proto import image_stream_pb2_grpc
 
 class ImageStreamerServicer(image_stream_pb2_grpc.ImageStreamerServicer):
     # Dictionary to store latest images from different sources
@@ -74,7 +74,7 @@ class ImageStreamerServicer(image_stream_pb2_grpc.ImageStreamerServicer):
         
         except Exception as e:
             # Log any streaming errors
-            logging.error(f'Streaming error from {device_id}: {str(e)}')
+            logger.error(f'Streaming error from {device_id}: {str(e)}')
             
             # Update device status
             ImageStreamerServicer._device_connections[device_id]['status'] = 'disconnected'

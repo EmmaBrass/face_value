@@ -2,7 +2,7 @@
 To learn:
 
 - Touch Designer for visual in middle screen?
-- What format do we need to be creating video in for feeding to the projectors?
+- What format do we need to be creating video in for feeding to the projectors? (e.g. resolution, frame rate)
 
 To make:
 

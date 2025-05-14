@@ -1,6 +1,7 @@
 import cv2
 from robot_control import robot_operation
 from grpc_image_streaming.server.image_receiver import ImageStreamerServicer
+from logger import image_logger as logger
 
 @robot_operation(mode='simulation')
 def example_movement(robot):
@@ -19,14 +20,19 @@ def example_movement(robot):
         move_finished_timeout=1000
     )
 
+def receive_image():
+    """
+    Example of receiving an image from the image receiver.
+    """
+
     # Example of getting the latest image
     # Get the most recent image from any source
     latest_image = ImageStreamerServicer.get_latest_image()
     latest_image_path = ImageStreamerServicer.get_latest_image_path()
     
     if latest_image is not None:
-        print(f'Latest image path: {latest_image_path}')
-        print(f'Latest image shape: {latest_image.shape}')
+        logger.info(f'Latest image path: {latest_image_path}')
+        logger.info(f'Latest image shape: {latest_image.shape}')
         
         # Optional: display the image (requires a GUI)
         cv2.imshow('Latest Image', latest_image)
@@ -35,7 +41,7 @@ def example_movement(robot):
 
     # List all sources that have sent images
     sources = ImageStreamerServicer.list_sources()
-    print('Image sources:', sources)
+    logger.info('Image sources:', sources)
 
     # Example of getting image from a specific source
     if sources:
@@ -44,10 +50,11 @@ def example_movement(robot):
         specific_image_path = ImageStreamerServicer.get_latest_image_path(specific_source)
         
         if specific_image is not None:
-            print(f'Image from source {specific_source}')
-            print(f'Image path: {specific_image_path}')
-            print(f'Image shape: {specific_image.shape}')
+            logger.info(f'Image from source {specific_source}')
+            logger.info(f'Image path: {specific_image_path}')
+            logger.info(f'Image shape: {specific_image.shape}')
 
 if __name__ == '__main__':
     # Demonstrate usage
     example_movement()
+    #receive_image()

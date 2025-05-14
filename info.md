@@ -11,4 +11,4 @@ https://wiki.cpr-robots.com/index.php/CPR_Wiki
 ----
 
 Raspberry Pi (type?) connected to cameras for images of the audience. 
--> gRPC for image streaming between Raspberry Pi and control computer.
+-> gRPC for image streaming between Raspberry Pi and control computer?

@@ -5,7 +5,7 @@ import grpc
 import cv2
 import numpy as np
 import sys
-sys.path.append('/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/grpc_image_streaming/proto')
+sys.path.append('/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/face_value/grpc_image_streaming/proto')
 
 import image_stream_pb2
 import image_stream_pb2_grpc
@@ -56,7 +56,7 @@ class TestImageSender:
             logger.error(f"Error sending images: {e}")
 
 def main():
-    test_images_dir = '/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/grpc_image_streaming/test_images'
+    test_images_dir = '/Users/Emma/Documents/Documents_MacBook_Pro/pen_plotter/RoL 2025/rol_2025/face_value/face_value/grpc_image_streaming/test_images'
     sender = TestImageSender(test_images_dir)
     sender.send_images()
 

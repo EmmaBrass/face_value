@@ -38,7 +38,7 @@ run_real_mode() {
     
     # Start image receiver
     echo -e "${YELLOW}Starting image receiver...${NC}"
-    python "${PROJECT_ROOT}/grpc_image_streaming/server/image_receiver.py" &
+    python "${PROJECT_ROOT}/face_value/grpc_image_streaming/server/image_receiver.py" &
     sleep 2  # Give server time to start
     
     # Start main application
@@ -55,12 +55,12 @@ run_simulation_mode() {
     
     # Start image receiver
     echo -e "${YELLOW}Starting image receiver...${NC}"
-    python "${PROJECT_ROOT}/grpc_image_streaming/server/image_receiver.py" &
+    python "${PROJECT_ROOT}/face_value/grpc_image_streaming/server/image_receiver.py" &
     sleep 2  # Give server time to start
     
     # Start test image sender
     echo -e "${YELLOW}Starting test image sender...${NC}"
-    python "${PROJECT_ROOT}/grpc_image_streaming/test_images/test_image_sender.py" &
+    python "${PROJECT_ROOT}/face_value/grpc_image_streaming/test_images/test_image_sender.py" &
     
     # Start main application
     echo -e "${YELLOW}Starting main application...${NC}"
