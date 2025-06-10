@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.env/
+.venv/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker files
+*.tar
+*.tar.gz
+*.img
+*.img.gz
+
+# Build directories
+ros_project/ros_3xs_docker/build/
+ros_project/ros_3xs_docker/devel/
+ros_project/ros_pi_docker/build/
+ros_project/ros_pi_docker/devel/
+*~
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Protobuf generated files
+*_pb2.py
+*_pb2_grpc.py
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Project specific
+*.mov
+*.mp4
+*.avi

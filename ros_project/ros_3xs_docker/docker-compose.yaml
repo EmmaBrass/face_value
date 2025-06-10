@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  ros_dev:
+    image: ros-native:jazzy
+    build: .
+    network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - ./src:/ros_ws/src
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    working_dir: /ros_ws
+    command: bash
