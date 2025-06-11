@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy ROS workspace into the container
-COPY ./ros_ws /ros_ws
+COPY ./ros_3xs_ws /ros_ws
 WORKDIR /ros_ws
 
 # Build the workspace

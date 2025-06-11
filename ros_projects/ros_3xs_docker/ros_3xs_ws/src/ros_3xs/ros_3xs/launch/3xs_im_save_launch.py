@@ -8,9 +8,9 @@ from launch.substitutions import LaunchConfiguration
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='ros_3xs_docker',
-            executable='screen1_node',
-            name='screen1_node',
+            package='ros_3xs',
+            executable='im_save_node',
+            name='im_save_node',
             parameters=[
                 {'log_level': 'INFO'}
             ],
