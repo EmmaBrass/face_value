@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 from robot_control import robot_operation
 
-
 class RobotNode(Node):
 
     def __init__(self):

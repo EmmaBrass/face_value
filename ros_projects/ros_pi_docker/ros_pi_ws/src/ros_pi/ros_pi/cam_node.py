@@ -1,4 +1,5 @@
-import cv2
+import rclpy
+from rclpy.node import Node
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 
@@ -13,21 +14,18 @@ class CamNode(Node):
 
         # Initialise image publisher
         self.cam_image_publisher = self.create_publisher(Image, f'cam_image_{self.cam_id}', 10)
-
-        timer_period = 5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback) # Publishing happens within the timer_callback
-
+        timer_period = 5
+        self.timer = self.create_timer(timer_period, self.timer_callback)
         self.cam_init()
 
     def cam_init(self):
         """
-        Initialize the webcam.
+        Initialise the webcam.
         """
-        # Initialize webcam (device 0 is usually the first webcam)
+        import cv2
         self.cap = cv2.VideoCapture(0)
-
         if not self.cap.isOpened():
-            print("Error: Could not open webcam") # TODO change to logger
+            self.get_logger().error('Could not open webcam')
             exit(1)
 
         # Set the resolution to maximum supported by the webcam
@@ -38,33 +36,23 @@ class CamNode(Node):
         # Get actual resolution
         width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        print(f"Capturing at resolution: {width}x{height}")
+        self.get_logger().info(f'Capturing at resolution: {width}x{height}')
 
-        self.bridge = CvBridge()
-        
     def timer_callback(self):
         """
         Publish an image to the cam_image topic.
         """
         print("Hello from the Raspberry Pi!") # TODO change to logger
 
-        # Capture frame
+        # Capture frame and publish
         ret, frame = self.cap.read()
-
         if not ret:
-            print("Error: Could not read frame")
-            self.cap.release()
-            exit(1)
+            self.get_logger().error('Failed to capture image')
+            return
+        bridge = CvBridge()
+        msg = bridge.cv2_to_imgmsg(frame, 'bgr8')
+        self.cam_image_publisher.publish(msg)
 
-        # Publish the image
-        self.cam_image_publisher.publish(self.bridge.cv2_to_imgmsg(frame, "bgr8"))
-
-        self.cap.release() # TODO move this to only run when the node is destroyed
-        cv2.destroyAllWindows()
-
-        print("Capture complete!")
-
-# TODO close and open cam connected periodically to avoid freezing up?
 
 def main(args=None):
     rclpy.init(args=args)
@@ -81,10 +69,3 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
-
-
-
-    
-
-
-    

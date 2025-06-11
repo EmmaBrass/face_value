@@ -26,6 +26,9 @@ build/
 *.img
 *.img.gz
 
+# Saved images
+ros_project/ros_3xs_docker/ros_ws/src/saved_images/
+
 # Build directories
 ros_project/ros_3xs_docker/build/
 ros_project/ros_3xs_docker/devel/
@@ -51,3 +54,6 @@ Thumbs.db
 *.mov
 *.mp4
 *.avi
+
+# GitHub token
+.token

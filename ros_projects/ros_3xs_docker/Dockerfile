@@ -5,9 +5,9 @@ RUN apt-get update && apt-get install -y \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up workspace
+# Copy ROS workspace into the container
+COPY ./ros_ws /ros_ws
 WORKDIR /ros_ws
-COPY ./src ./src
 
 # Build the workspace
 RUN bash -c "source /opt/ros/jazzy/setup.bash && colcon build"

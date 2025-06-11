@@ -3,6 +3,7 @@ from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 
+
 def generate_launch_description():
     pi_number = LaunchConfiguration('pi_number')
 
@@ -13,7 +14,7 @@ def generate_launch_description():
             description='Number of the Pi (1, 2, 3, etc.)'
         ),
         Node(
-            package='rol_pi',
+            package='ros_pi',
             executable='cam_node',
             name='cam_node_' + pi_number,
             parameters=[

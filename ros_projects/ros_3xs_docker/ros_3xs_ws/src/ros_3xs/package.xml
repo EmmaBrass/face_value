@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ros_3xs</name>
+  <version>0.0.1</version>
+  <description>ROS2 package for 3xs computer nodes</description>
+  <maintainer email="emma@example.com">Emma Brass</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclpy</depend>
+
+  <exec_depend>rclpy</exec_depend>
+
+</package>
