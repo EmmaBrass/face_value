@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from config import NUMBER_OF_CAMERAS
+from . import config
 from sensor_msgs.msg import Image
 import os
 from cv_bridge import CvBridge
@@ -18,7 +18,7 @@ class Screen1Node(Node):
         # Initialise image subscribers
         self.cam_image_subscribers = []
         self.bridge = CvBridge()
-        for i in range(1, NUMBER_OF_CAMERAS + 1):
+        for i in range(1, config.NUMBER_OF_CAMERAS + 1):
             self.cam_image_subscribers.append(self.create_subscription(
                 Image,
                 f'cam_image_{i}',

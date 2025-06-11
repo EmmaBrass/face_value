@@ -1,0 +1,56 @@
+# Ignore git files
+.git
+.gitignore
+.gitmodules
+
+# Ignore build artifacts
+build/
+install/
+log/
+*.pyc
+__pycache__/
+*.so
+*.o
+
+# Ignore development environment files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# Ignore package management files
+*.egg-info/
+dist/
+*.pyc
+*.pyo
+
+# Ignore ROS specific files
+devel/
+*.rosinstall
+*.rosinstall2
+*.rosinstall3
+
+# Ignore Docker build cache
+.docker-cache/
+.docker-build/
+.docker-logs/
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.log
+*.bak
+
+# Ignore IDE-specific files
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignore Python virtual environments
+venv/
+env/
+.venv/

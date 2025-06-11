@@ -1,16 +1,29 @@
-FROM ros:jazzy
+FROM osrf/ros:jazzy-desktop-full
 
-# Install build tools
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
     python3-colcon-common-extensions \
-    && rm -rf /var/lib/apt/lists/*
+    python3-rosdep \
+ && rm -rf /var/lib/apt/lists/*
 
-# Copy ROS workspace into the container
-COPY ./ros_3xs_ws /ros_ws
-WORKDIR /ros_ws
+# Initialize rosdep (if not done in base image)
+RUN rosdep init || true
+RUN rosdep update
 
-# Build the workspace
-RUN bash -c "source /opt/ros/jazzy/setup.bash && colcon build"
+# Set working directory
+WORKDIR /root/ros2_ws
 
-# Source and launch by default (optional)
-CMD ["bash"]
+# Copy your workspace source code into the image
+COPY ros_3xs_ws/ /root/ros2_ws/
+
+# Install dependencies from rosdep (ignoring source packages)
+RUN rosdep install --from-paths src --ignore-src -r -y
+
+# Build your workspace
+RUN . /opt/ros/jazzy/setup.sh && colcon build --symlink-install
+
+# Copy helper script to container
+COPY docker/setup_and_run.sh /root/setup_and_run.sh
+RUN chmod +x /root/setup_and_run.sh
+
+# Set entrypoint to your script
+ENTRYPOINT ["/root/setup_and_run.sh"]
