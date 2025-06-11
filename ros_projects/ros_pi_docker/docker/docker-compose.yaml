@@ -21,11 +21,6 @@ services:
       - "9091:9091"
     network_mode: host
     privileged: true
-  myapp:
-    build: .
-    environment:
-      - OLLAMA_HOST=http://host.docker.internal:11434
-
 
 networks:
   default:
