@@ -13,8 +13,11 @@ class ConductorNode(Node):
         """
         pass
 
-
-        
+    def run(self):
+        """
+        Whatever processes happen at runtime.
+        """
+        pass
 
 def main(args=None):
     rclpy.init(args=args)
