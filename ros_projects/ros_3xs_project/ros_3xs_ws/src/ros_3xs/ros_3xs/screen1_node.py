@@ -50,6 +50,8 @@ class Screen1Node(Node):
         """
         Update the array of processed images on the screen.
         """
+        # TODO use TD for this screen as well? Can Python be used for this?
+        
         pass
 
 def main(args=None):
