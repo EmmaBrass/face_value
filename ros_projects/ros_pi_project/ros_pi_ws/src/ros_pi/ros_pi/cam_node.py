@@ -23,7 +23,7 @@ class CamNode(Node):
         Initialise the webcam.
         """
         import cv2
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(1)
         if not self.cap.isOpened():
             self.get_logger().error('Could not open webcam')
             exit(1)
@@ -42,7 +42,7 @@ class CamNode(Node):
         """
         Publish an image to the cam_image topic.
         """
-        print("Hello from the Raspberry Pi!") # TODO change to logger
+        self.get_logger().info("In timer callback")
 
         # Capture frame and publish
         ret, frame = self.cap.read()

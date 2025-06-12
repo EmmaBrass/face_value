@@ -6,10 +6,10 @@ import os
 from cv_bridge import CvBridge
 import cv2
 
-class Screen1Node(Node):
+class ImageSaveNode(Node):
 
     def __init__(self):
-        super().__init__('screen1_node')
+        super().__init__('image_save_node')
         
         # Create save directory if it doesn't exist
         self.save_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'saved_images')
@@ -31,6 +31,7 @@ class Screen1Node(Node):
         Callback function for image subscriber.
         Saves the latest image from each camera to a folder.
         """
+        self.get_logger().info("In image callback")
         try:
             # Convert ROS image to OpenCV format
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
@@ -72,14 +73,14 @@ class Screen1Node(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    screen1_node = Screen1Node()
+    image_save_node = ImageSaveNode()
 
-    rclpy.spin(screen1_node)
+    rclpy.spin(image_save_node)
 
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
-    screen1_node.destroy_node()
+    image_save_node.destroy_node()
     rclpy.shutdown()
 
 if __name__ == '__main__':

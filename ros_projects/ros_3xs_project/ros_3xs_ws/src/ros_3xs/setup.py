@@ -25,7 +25,7 @@ setup(
             'screen3_node = ros_3xs.screen3_node:main',
             'screen2_node = ros_3xs.screen2_node:main',
             'screen1_node = ros_3xs.screen1_node:main',
-            'im_save_node = ros_3xs.im_save_node:main',
+            'image_save_node = ros_3xs.image_save_node:main',
             'robot_node = ros_3xs.robot_node:main'
         ],
     },

@@ -27,13 +27,15 @@ build/
 *.img.gz
 
 # Saved images
-ros_project/ros_3xs_docker/ros_ws/src/saved_images/
+ros_projects/ros_3xs_project/ros_3xs_ws/src/saved_images/
 
 # Build directories
-ros_project/ros_3xs_docker/build/
-ros_project/ros_3xs_docker/devel/
-ros_project/ros_pi_docker/build/
-ros_project/ros_pi_docker/devel/
+ros_projects/ros_3xs_project/ros_3xs_ws/build/
+ros_projects/ros_3xs_project/ros_3xs_ws/log/
+ros_projects/ros_3xs_project/ros_3xs_ws/install/
+ros_projects/ros_pi_project/ros_pi_ws/build/
+ros_projects/ros_pi_project/ros_pi_ws/log/
+ros_projects/ros_pi_project/ros_pi_ws/install/
 *~
 
 # Logs
