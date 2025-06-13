@@ -59,3 +59,7 @@ Thumbs.db
 
 # GitHub token
 TOKEN*
+
+# Images
+*.jpg
+*.png

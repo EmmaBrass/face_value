@@ -5,26 +5,41 @@ from sensor_msgs.msg import Image
 import os
 from cv_bridge import CvBridge
 import cv2
+import sys
+sys.stdout.reconfigure(line_buffering=True)
+
 
 class ImageSaveNode(Node):
 
     def __init__(self):
         super().__init__('image_save_node')
+
+        self.get_logger().set_level(rclpy.logging.LoggingSeverity.INFO)
         
         # Create save directory if it doesn't exist
-        self.save_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'saved_images')
+        self.save_dir = config.IMAGE_FILE
         os.makedirs(self.save_dir, exist_ok=True)
         
         # Initialise image subscribers
-        self.cam_image_subscribers = []
+        # self.cam_image_subscribers = []
         self.bridge = CvBridge()
-        for i in range(1, config.NUMBER_OF_CAMERAS + 1):
-            self.cam_image_subscribers.append(self.create_subscription(
-                Image,
-                f'cam_image_{i}',
-                self.cam_image_callback, # TODO need to think about callback groups... this will be called lots of times and they need to get called in parallel. Could have dif image processing nodes for each topic?
-                10
-            ))
+
+        self.cam_image_subscriber = self.create_subscription(
+            Image,
+            'cam_image_1',
+            self.cam_image_callback, 
+            10
+        )
+
+        self.get_logger().info("ImageSaveNode has started")
+
+        # for i in range(1, config.NUMBER_OF_CAMERAS + 1):
+        #     self.cam_image_subscribers.append(self.create_subscription(
+        #         Image,
+        #         f'cam_image_{i}',
+        #         self.cam_image_callback, # TODO need to think about callback groups... this will be called lots of times and they need to get called in parallel. Could have dif image processing nodes for each topic?
+        #         10
+        #     ))
 
     def cam_image_callback(self, msg):
         """
@@ -37,10 +52,11 @@ class ImageSaveNode(Node):
             cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
             
             # Get camera number from topic name
-            cam_num = int(msg.header.frame_id.split('_')[-1])
+            cam_num = 1
             
-            # Create filename with timestamp
-            timestamp = msg.header.stamp.sec
+            now = self.get_clock().now().to_msg()
+            timestamp = now.sec
+            
             filename = f'cam_{cam_num}_{timestamp}.jpg'
             filepath = os.path.join(self.save_dir, filename)
             

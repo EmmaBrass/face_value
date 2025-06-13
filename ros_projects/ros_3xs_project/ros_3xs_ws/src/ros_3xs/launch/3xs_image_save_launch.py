@@ -11,6 +11,7 @@ def generate_launch_description():
             package='ros_3xs',
             executable='image_save_node',
             name='image_save_node',
+            output='screen',  # <- this ensures logs are printed
             parameters=[
                 {'log_level': 'INFO'}
             ],

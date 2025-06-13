@@ -10,7 +10,6 @@ class ConductorNode(Node):
         super().__init__('conductor_node')
 
         self.state_machine = ConductorStateMachine()
-
         self.prev_state_complete = False
 
         # Initialise publishers
@@ -49,6 +48,9 @@ class ConductorNode(Node):
             elif self.state_machine.state == 'face_move_2_3':
                 self.face_move_2_3()
 
+        # TODO have processing here! e.g. if we are about to move into face_edit, but the move is not done yet, 
+        # can be preemptively preparing for the edit my choosing edit types and path vectors etc, to avoid delays.
+
     def startup(self):
         """
         Whatever processes happen in the startup state.
@@ -71,6 +73,7 @@ class ConductorNode(Node):
         """
         Whatever processes happen in the face_move_1_2 state.
         """
+        # potent
         pass
 
     def face_edit(self):
@@ -81,6 +84,15 @@ class ConductorNode(Node):
         # With, e.g., 3 arm motions (could reduce or increase this number based on how long each one takes).
         # Within this method, choose the edit types and generate the path vector.
         # Then, path vector and edit type needs to get passed to TD, and robot, and LLM !
+
+        # Generate a bezier curve that fits well within the size of screen 2.
+
+        # Extract an array of coordinates, for sending to the robot.
+
+        # Extract an arroy of coordinates in whatever format is needed for TD.
+
+        
+
         pass
 
     def face_edit_done(self):
