@@ -63,3 +63,7 @@ TOKEN*
 # Images
 *.jpg
 *.png
+
+# TD stuff
+*.csv
+td_project/Backup/*
